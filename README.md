@@ -1,2 +1,2 @@
 # misc
-Miscelaneous programs
+Miscelaneous science programs
