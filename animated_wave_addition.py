@@ -11,6 +11,7 @@ X_SAMPLES = 1000
 F_MIN = 1
 F_MAX = 50
 F_SAMPLES = F_MAX
+TIME_DELAY = 0.5
 
 
 def plot_wave(x, y):
@@ -43,7 +44,7 @@ def calculate_sum_wave(x, frequency_list):
     return sum_wave
 
 
-def plot_waves(x_min, x_max, x_samples, f_min, f_max, f_samples):
+def plot_waves(x_min, x_max, x_samples, f_min, f_max, f_samples, time_delay):
     """
     Plot a series of waves. Each wave will be the sum of all the waves for a given frequency range.
     This function iterates over the total number of frequencies, including one more in each iteration.
@@ -60,6 +61,8 @@ def plot_waves(x_min, x_max, x_samples, f_min, f_max, f_samples):
     :type f_max: float
     :param f_samples: number of frequencies
     :type f_samples: int
+    :param time_delay: time to wait between plots
+    :type time_delay: float
     :return: nothing
     """
     x = np.linspace(x_min, x_max, x_samples)
@@ -76,7 +79,7 @@ def plot_waves(x_min, x_max, x_samples, f_min, f_max, f_samples):
         plt.ylabel('Amplitud')
         plt.grid(True)
         plt.plot(x, sum_wave)
-        plt.pause(0.5)
+        plt.pause(time_delay)
     plt.show()
 
 
@@ -127,9 +130,17 @@ def get_args(argv):
                         default=F_SAMPLES,
                         help='number of frequencies [default=' + str(F_SAMPLES) + ']')
 
+    parser.add_argument('--delay',
+                        action='store',
+                        dest='delay',
+                        default=TIME_DELAY,
+                        help='number of frequencies [default=' + str(TIME_DELAY) + ']')
+
     return parser.parse_args(argv[1:])
 
 
 if __name__ == '__main__':
     args = get_args(sys.argv)
-    plot_waves(float(args.x1), float(args.x2), int(args.nx), float(args.f1), float(args.f2), int(args.nf))
+    plot_waves(float(args.x1), float(args.x2), int(args.nx),
+               float(args.f1), float(args.f2), int(args.nf),
+               float(args.delay))
