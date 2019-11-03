@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import math
 import matplotlib.pyplot as plt
@@ -181,8 +182,6 @@ def plot_energies(title, temp_list, max_energy, steps):
     :type title: str
     :param temp_list: list of temperatures
     :type temp_list: list
-    :param mass: molecular mass
-    :type mass: float
     :param max_energy: maximum energy to plot in the 'x' axis
     :type max_energy: float
     :param steps: number of plot steps
@@ -193,7 +192,7 @@ def plot_energies(title, temp_list, max_energy, steps):
         l, = plt.plot(x, y, label=str(temperature) + ' C')
         plt.setp(l, linewidth=1)
         plt.title(title)
-        plt.xlabel('[Joules]')
+        plt.xlabel('[Joules / mol]')
         plt.ylabel('%')
         plt.legend()
     plt.show()
@@ -282,6 +281,12 @@ def get_args(argv):
 
 if __name__ == '__main__':
     args = get_args(sys.argv)
+
+    # Defaults
+    molecular_mass, default_title = mass_and_title(str(M_WATER))
+    temperature_list = [300]
+    maximum_speed = MAX_SPEED
+    maximum_energy = MAX_ENERGY
 
     # Convert max energy and max speed to float
     try:
