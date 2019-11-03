@@ -39,7 +39,7 @@ def calculate_sum_wave(x, frequency_list):
     """
     sum_wave = np.zeros(x.size)
     for f in frequency_list:
-        y = np.sin(np.pi * f * x)
+        y = np.cos(np.pi * f * x)
         sum_wave = np.add(sum_wave, y)
     return sum_wave
 
@@ -68,6 +68,7 @@ def plot_waves(x_min, x_max, x_samples, f_min, f_max, f_samples, time_delay):
     x = np.linspace(x_min, x_max, x_samples)
 
     frequency_list = np.linspace(f_min, f_max, f_samples)
+    # print(frequency_list)
 
     for n in range(frequency_list.size):
         frequency_slice = frequency_list[0:n + 1]
